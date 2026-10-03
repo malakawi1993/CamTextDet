@@ -127,7 +127,7 @@ TextSpotter is built so it never takes over the board:
 
 | Message / problem | Fix |
 |---|---|
-| `ImportError: libGL.so.1: cannot open shared object file` | The GUI build of OpenCV (`opencv-python`) got installed instead of the headless one — the UNO Q has no display server, so it can't load `libGL`. In the board's terminal (or App Lab's venv) run: `pip uninstall -y opencv-python && pip install --force-reinstall opencv-python-headless` |
+| `ImportError: libGL.so.1: cannot open shared object file` | The "smart" reader pulls in the GUI build of OpenCV, which needs `libGL.so.1` — a library the UNO Q doesn't ship (no display server). One-time fix in the board's terminal: `sudo apt update && sudo apt install -y libgl1` |
 | "I can't reach the camera" | Open the same `rtsp://` address in VLC on a computer. If VLC can't open it, the address or password is wrong. Passwords go in the URL: `rtsp://user:pass@ip:554/...` |
 | "I don't have a text reader yet" | Install one of the readers above |
 | Text is missed | Bigger letters, more light, hold the paper still, or try `picture_size=960` |

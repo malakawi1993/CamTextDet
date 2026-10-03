@@ -4,8 +4,10 @@
 #
 # Setup: copy the "textspotter" folder into this "python" folder (next to main.py).
 #
-# Note: requirements.txt pins opencv-python-headless. The UNO Q has no display
-# server, so the regular opencv-python build fails with "libGL.so.1 not found".
+# One-time setup in the board's terminal (SSH or adb shell):
+#   sudo apt update && sudo apt install -y libgl1
+# The "smart" reader pulls in the GUI build of OpenCV, which needs libGL.so.1 -
+# a library the UNO Q doesn't ship because it has no display server.
 
 import time
 

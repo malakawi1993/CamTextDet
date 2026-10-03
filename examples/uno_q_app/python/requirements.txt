@@ -1,5 +1,6 @@
-# Pin the headless OpenCV FIRST. rapidocr_onnxruntime also depends on it, and
-# if the GUI build (opencv-python) gets installed instead, importing cv2 fails
-# with "ImportError: libGL.so.1" because the UNO Q has no display server.
+# rapidocr_onnxruntime hard-depends on opencv-python (the GUI build), which
+# needs libGL.so.1 - a library the UNO Q doesn't ship because it has no
+# display server. So before the first run, in the board's terminal do:
+#   sudo apt update && sudo apt install -y libgl1
 opencv-python-headless>=4.8
 rapidocr_onnxruntime
