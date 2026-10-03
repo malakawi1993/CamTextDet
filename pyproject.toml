@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=64"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "textspotter"
+version = "1.0.0"
+description = "Kid-friendly text recognition from an RTSP camera for the Arduino UNO Q"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = ["opencv-python-headless>=4.8", "numpy"]
+
+[project.optional-dependencies]
+smart = ["rapidocr_onnxruntime>=1.3"]
+fast = ["pytesseract>=0.3"]
+test = ["pytest"]
+
+[project.scripts]
+textspotter = "textspotter.__main__:main"
+
+[tool.setuptools]
+packages = ["textspotter"]

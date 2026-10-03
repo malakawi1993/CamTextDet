@@ -1,0 +1,3 @@
+name: Text Spotter
+icon: 🔤
+description: Reads text from a WiFi (RTSP) camera, prints it, and smiles on the LED matrix when it sees the magic word.
