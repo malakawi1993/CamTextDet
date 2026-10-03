@@ -37,22 +37,6 @@ def _check_cv2_build():
             "  pip uninstall -y opencv-python && pip install --force-reinstall opencv-python-headless"
         )
 
-    # The GUI build of OpenCV (pulled in by rapidocr_onnxruntime) needs
-    # libGL.so.1, which the UNO Q doesn't ship. If it's missing, say so.
-    try:
-        import ctypes.util
-
-        if ctypes.util.find_library("GL") is None:
-            raise TextSpotterError(
-                "OpenCV can't load libGL.so.1 - the UNO Q has no display server.\n"
-                "One-time fix in the board's terminal (SSH or adb shell):\n"
-                "  sudo apt update && sudo apt install -y libgl1"
-            )
-    except TextSpotterError:
-        raise
-    except Exception:
-        pass
-
 
 _check_cv2_build()
 
