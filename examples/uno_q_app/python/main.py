@@ -3,6 +3,9 @@
 # LED matrix smile when it sees the magic word.
 #
 # Setup: copy the "textspotter" folder into this "python" folder (next to main.py).
+#
+# Note: requirements.txt pins opencv-python-headless. The UNO Q has no display
+# server, so the regular opencv-python build fails with "libGL.so.1 not found".
 
 import time
 

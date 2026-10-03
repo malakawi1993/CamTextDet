@@ -9,12 +9,36 @@ That keeps the picture fresh and the CPU cool.
 """
 
 import os
+import sysconfig
 import threading
 import time
 
 import cv2
 
 from .errors import TextSpotterError
+
+
+def _check_cv2_build():
+    """The UNO Q has no display server, so only opencv-python-headless works.
+
+    If the GUI build (opencv-python) or a system-wide cv2 gets imported
+    instead, it dies with "ImportError: libGL.so.1". Catch that here and say
+    what to do about it.
+    """
+    try:
+        path = os.path.dirname(os.path.abspath(cv2.__file__))
+    except Exception:
+        return
+    venv = sysconfig.get_path("purelib")
+    if venv and not path.startswith(venv):
+        raise TextSpotterError(
+            "cv2 was loaded from outside this app's venv: " + path + ".\n"
+            "The UNO Q needs the headless build. In the board's terminal run:\n"
+            "  pip uninstall -y opencv-python && pip install --force-reinstall opencv-python-headless"
+        )
+
+
+_check_cv2_build()
 
 STREAM_PREFIXES = ("rtsp://", "rtsps://", "http://", "https://", "udp://", "tcp://")
 
